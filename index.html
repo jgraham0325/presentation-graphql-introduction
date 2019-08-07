@@ -77,29 +77,7 @@
               Over-fetching
 
               <ul class="fragment fade-in" data-fragment-index="1">
-                <li>Call: http://server/api/title/AG234343</li>
-                  <li><pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">
-{
-"title_number": "AGL10368",
-"tenure": "leasehold",
-"class_of_title": "absolute",
-"status": {
-"value": "open",
-"date": null
-},
-"edition_date": "2006-01-10",
-"application_reference": "UPD0019",
-"application_timestamp": "2006-01-10T00:00:01Z",
-"estate_interest": "estate in land",
-"entries": [
-{
-"subregister_code": "A",
-"schedule_code": null,
-"register_sequence": 1,
-"role_code": "RDES",
-"entry_date": "1989-06-30",
-...
-                  </code></pre></li>
+                <li>http://server/api/title/AG234343</li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="2">
@@ -107,8 +85,6 @@
 
               <ul class="fragment fade-in" data-fragment-index="3">
                   <li>/title/AGL10368/entry/5/role_code</li>
-
-                  <li><pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">  { "RDES" } </code></pre></li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="4">
@@ -143,9 +119,38 @@
             <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
             <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
             <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
+              <li class="fragment fade-in" data-fragment-index="3">Used by </li>
             <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
           </ul>
         </section>
+
+                <section>
+                    <h2>Main Advantages</h2>
+
+                    <ul>
+                        <li>Get exactly the data you need, leading to better performance</li>
+                        <li>Understand exactly what fields our clients are using</li>
+                        <li>Simplifies deprecating old fields, no need for API versioning (e.g. /api/v1/title, /api/v2/title)</li>
+                        <li>Enables many different data sources to be easily stitched together (e.g. APIs, DBs, Flat files)</li>
+                        <li>Enables real-time push updates to clients through subscriptions. e.g. after a incremental migration</li>
+                        <li>Easier maintenance by avoiding a large number of separate endpoints</li>
+                        <li>Validation and type checking out-of-the-box</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Main Disadvantages</h2>
+
+                    <ul>
+                        <li>Still maturing as a technology</li>
+                        <li>Caching can be more difficult but libraries available to help (e.g. Apollo)</li>
+                        <li>Not familiar to our users, requires the use of a client library (we could provide)</li>
+                        <li>Development work required to setup and maintain in conjunction with standard REST APIs</li>
+                        <li>Fine grained security can be more challenging</li>
+                        <li>Dealing with errors requires client to look at response payload since always get a 200 response</li>
+                        <li>Potential performance issues with complex queries</li>
+                    </ul>
+                </section>
 
         <section>
           <h2>Response Structure</h2>
