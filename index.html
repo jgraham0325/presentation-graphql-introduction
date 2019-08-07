@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>GraphQL with Sangria</title>
+		<title>GraphQL</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Oleg Ilyenko">
@@ -59,7 +59,7 @@
           </p>
 
           <p style="font-size: 70%; opacity: 0.5" class="normal-font">
-            by Oleg Ilyenko / <a href="https://twitter.com/easyangel">@easyangel</a>
+            by James Graham
           </p>
 				</section>
 
@@ -77,14 +77,14 @@
               Over-fetching
 
               <ul class="fragment fade-in" data-fragment-index="1">
-                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+                <li>/title?<span class="qname">field</span>=<span class="qvalue">titleNumber</span>&<span class="qname">status</span>=<span class="qvalue">editionDate</span>&<span class="qname">estateInterest</span>=<span class="qvalue">entries[*].roleCode</span></li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="2">
               Under-fetching
 
               <ul class="fragment fade-in" data-fragment-index="3">
-                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+                <li>/title?<span class="qname">expand</span>=<span class="qvalue">titleNumber</span>&<span class="qname">expand</span>=<span class="qvalue">entries[*].entryId</span></li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="4">
@@ -119,7 +119,6 @@
             <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
             <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
             <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
-            <li class="fragment fade-in" data-fragment-index="4">Relay released in August 2015</li>
             <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
           </ul>
         </section>
@@ -128,16 +127,11 @@
           <h2>Response Structure</h2>
 
           <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query MyProduct {
-  product(id: 123) {
-    name
-    description
-
-    picture {
-      width
-      height
-      url
-    }
+query {
+  title(titleNumber:"AGL10368"){
+    titleNumber,
+    classOfTitle,
+    estateInterest
   }
 }
           </code></pre>
@@ -145,86 +139,16 @@ query MyProduct {
           <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
 {
   "data": {
-    "product": {
-      "name": "Delicious Cake",
-      "description": "Just taste it!"
-
-      "picture": {
-        "width": 150,
-        "height": 150,
-        "url": "http://..."
-      }
+    "title": {
+      "titleNumber": "AGL10368",
+      "classOfTitle": "ABSOLUTE",
+      "estateInterest": "ESTATE_IN_LAND"
     }
   }
 }
           </code></pre>
         </section>
 
-        <section>
-          <h2>Every field Is a Function</h2>
-
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query MyProduct {
-  products {
-    picture(size: 300) {
-      width, height, url
-    }
-  }
-}
-          </code></pre>
-
-          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-{
-  "data": {
-    "products": [
-      {
-        "picture": {
-          "width": 300,
-          "height": 300,
-          "url": "http://..."
-        }
-      },
-      ...
-    ]
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Aliases</h2>
-
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query MyProduct {
-  products {
-    thumb: picture(size: 100) {
-      width
-    }
-    fullSize: picture(size: 500) {
-      width
-    }
-  }
-}
-          </code></pre>
-
-          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-{
-  "data": {
-    "products": [
-      {
-        "thumb": {
-          "width": 100
-        },
-        "fullSize": {
-          "width": 500
-        }
-      },
-      ...
-    ]
-  }
-}
-          </code></pre>
-        </section>
 
         <section>
           <img src="assets/img/data-requirements.svg">
@@ -234,32 +158,16 @@ query MyProduct {
           <h2>Type System</h2>
 
           <pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">
-type Picture {
-  width: Int!
-  height: Int!
-  url: String
-}
-          </code></pre>
-
-          <pre style="float: left; width: 40%" class="fragment fade-in" data-fragment-index="3"><code data-trim contenteditable class="javascript">
-type Query {
-  product(id: Int!): Product
-  products: [Product]
-}
-          </code></pre>
-
-          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-interface Identifiable {
-  id: String!
-}
-          </code></pre>
-
-          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="2"><code data-trim contenteditable class="javascript">
-type Product implements Identifiable {
-  id: String!
-  name: String!
-  description: String
-  picture(size: Int): Picture
+type Title {
+  applicationReference: String!
+  applicationTimestamp: OffsetDateTime
+  classOfTitle: ClassOfTitle
+  editionDate: LocalDate
+  entries: [RegisterEntry]!
+  estateInterest: EstateInterest
+  status: TitleStatusInfo!
+  tenure: Tenure
+  titleNumber: String!
 }
           </code></pre>
         </section>
@@ -268,19 +176,19 @@ type Product implements Identifiable {
           <h2>Mutations & Subscriptions</h2>
 
           <pre><code data-trim contenteditable class="javascript">
-mutation ChangeStaff {
-  changeName(productId: 123, newName: "Cheesecake") {
-    id, version
+mutation ChangeTitle {
+  changeStatus(titleNumber: AGL10368, newStatus: "Closed", date: "2018-01-02" ) {
+    titleNumber, status
   }
 
-  setDescription(productId: 123, description: "Delicious!") {
-    id, version
+  setApplicationReference(titleNumber: "AGL10368", newApplicationReference: "ABR33434") {
+    titleNumber, status, applicationReference
   }
 }
 
-subscription ProductEvents {
-  nameChanged(productId: 123) { name }
-  productDeleted { id }
+subscription Entries {
+  entryChanges(titleNumber: "AGL10368") { entries }
+  entryDeleted { entryId }
 }
           </code></pre>
         </section>
@@ -290,22 +198,6 @@ subscription ProductEvents {
           <!-- GrpahiQL, Fragments, Introspection, docs -->
 
           <pre><code class="graphiql javascript" data-trim contenteditable>
-{
-  hero {
-    id
-    name
-  }
-}
-
-// Response
-{
-  "data": {
-    "hero": {
-      "id": "2001",
-      "name": "R2-D2"
-    }
-  }
-}
           </code></pre>
         </section>
 
@@ -355,25 +247,6 @@ var ProductType = new GraphQLObjectType({
     }
   }
 });
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Example: Scala</h2>
-
-          <pre><code data-trim contenteditable class="scala">
-val ProductType = ObjectType(
-  "Product",
-  "Commodity available for purchase",
-  fields[Unit, Product](
-    Field("id", StringType,
-      resolve = _.value.id),
-    Field("onStock", IntType,
-      resolve = _.value.onStock + 10)))
-          </code></pre>
-
-          <pre class="fragment roll-in" data-fragment-index="1"><code data-trim contenteditable class="scala">
-val ProductType = deriveObjectType[Unit, Product]()
           </code></pre>
         </section>
 
