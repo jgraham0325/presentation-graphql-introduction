@@ -111,22 +111,50 @@
           <ul>
             <li>A data query language</li>
             <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook, specification open sourced in 2015</li>
-              <li class="fragment fade-in" data-fragment-index="3">Used by Facebook, GitHub, Twitter, Instagram, PayPal, Sky and many others</li>
-            <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
+              <li class="fragment fade-in" data-fragment-index="2">Used by Facebook, GitHub,
+                  Twitter, Instagram, PayPal, Sky and many others
+              </li>
+              <li class="fragment fade-in" data-fragment-index="3">Specification: <a
+                      href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a>
+              </li>
           </ul>
+        </section>
+
+        <section>
+                    <h2>Demo Time</h2>
+                    <!-- GrpahiQL, Fragments, Introspection, docs -->
+
+                    <pre><code class="graphiql javascript" data-trim contenteditable>
+          </code></pre>
         </section>
 
                 <section>
                     <h2>Main Advantages</h2>
 
                     <ul>
-                        <li>Get exactly the data you need, leading to better performance</li>
-                        <li>Understand exactly what fields our clients are using</li>
-                        <li>Simplifies deprecating old fields, no need for API versioning (e.g. /api/v1/title, /api/v2/title)</li>
-                        <li>Enables many different data sources to be easily stitched together (e.g. APIs, DBs, Flat files)</li>
-                        <li>Enables real-time push updates to clients through subscriptions. e.g. after a incremental migration</li>
-                        <li>Easier maintenance by avoiding a large number of separate endpoints</li>
-                        <li>Validation and type checking out-of-the-box</li>
+                        <li class="fragment fade-in" data-fragment-index="1">Get exactly the data
+                            you need, leading to better performance
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="2">Understand exactly what
+                            fields our clients are using
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="3">Simplifies deprecating
+                            old fields, no need for API versioning (e.g. /api/v1/title,
+                            /api/v2/title)
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="4">Enables many different
+                            data sources to be easily stitched together (e.g. APIs, DBs, Flat files)
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="5">Enables real-time push
+                            updates to clients through subscriptions. e.g. after a incremental
+                            migration
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="6">Easier maintenance by
+                            avoiding a large number of separate endpoints
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="7">Validation and type
+                            checking out-of-the-box
+                        </li>
                     </ul>
                 </section>
 
@@ -134,64 +162,30 @@
                     <h2>Main Disadvantages</h2>
 
                     <ul>
-                        <li>Still maturing as a technology</li>
-                        <li>Caching can be more difficult but libraries available to help (e.g. Apollo)</li>
-                        <li>Not familiar to our users, requires the use of a client library (we could provide)</li>
-                        <li>Development work required to setup and maintain in conjunction with standard REST APIs</li>
-                        <li>Fine grained security can be more challenging</li>
-                        <li>Dealing with errors requires client to look at response payload since always get a 200 response</li>
-                        <li>Potential performance issues with complex queries</li>
+                        <li class="fragment fade-in" data-fragment-index="1">Still maturing as a
+                            technology
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="2">Caching can be more
+                            difficult but libraries available to help (e.g. Apollo)
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="3">Not familiar to our
+                            users, requires the use of a client library (we could provide)
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="4">Development work
+                            required to setup and maintain in conjunction with standard REST APIs
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="5">Fine grained security
+                            can be more challenging
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="6">Dealing with errors
+                            requires client to look at response payload since always get a 200
+                            response
+                        </li>
+                        <li class="fragment fade-in" data-fragment-index="7">Potential performance
+                            issues with complex queries
+                        </li>
                     </ul>
                 </section>
-
-        <section>
-          <h2>Response Structure</h2>
-
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query {
-  title(titleNumber:"AGL10368"){
-    titleNumber,
-    classOfTitle,
-    estateInterest
-  }
-}
-          </code></pre>
-
-          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-{
-  "data": {
-    "title": {
-      "titleNumber": "AGL10368",
-      "classOfTitle": "ABSOLUTE",
-      "estateInterest": "ESTATE_IN_LAND"
-    }
-  }
-}
-          </code></pre>
-        </section>
-
-
-        <section>
-          <img src="assets/img/data-requirements.svg">
-        </section>
-
-        <section>
-          <h2>Type System</h2>
-
-          <pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">
-type Title {
-  applicationReference: String!
-  applicationTimestamp: OffsetDateTime
-  classOfTitle: ClassOfTitle
-  editionDate: LocalDate
-  entries: [RegisterEntry]!
-  estateInterest: EstateInterest
-  status: TitleStatusInfo!
-  tenure: Tenure
-  titleNumber: String!
-}
-          </code></pre>
-        </section>
 
         <section>
           <h2>Mutations & Subscriptions</h2>
@@ -215,63 +209,43 @@ subscription Entries {
         </section>
 
         <section>
-          <h2>Demo Time</h2>
-          <!-- GrpahiQL, Fragments, Introspection, docs -->
-
-          <pre><code class="graphiql javascript" data-trim contenteditable>
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Backend Agnostic</h2>
-
-          <img src="assets/img/app-layers.svg" style="width: 75%">
-        </section>
-
-        <section>
           <h2>Languages</h2>
 
           <div class="logos">
             <div class="impl-logo"><a href="https://github.com/graphql/graphql-js/"><img src="assets/img/js-logo.svg"></a></div>
             <div class="impl-logo"><a href="https://github.com/graphql/graphql-js/"><img src="assets/img/node-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="1"><a href="http://sangria-graphql.org/"><img src="assets/img/scala-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="1"><a href="http://sangria-graphql.org/"><img src="assets/img/sangria-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="2"><a href="https://github.com/graphql-java/graphql-java"><img src="assets/img/java-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="3"><a href="http://graphene-python.org/"><img src="assets/img/python-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="3"><a href="http://graphene-python.org/"><img src="assets/img/graphene.png"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="4"><a href="https://github.com/rmosolgo/graphql-ruby"><img src="assets/img/ruby_logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="5"><a href="https://github.com/graphql-elixir/graphql"><img src="assets/img/elixir-logo.png" ></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/jdnavarro/graphql-haskell"><img src="assets/img/haskell-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/graphql-go/graphql"><img src="assets/img/gopher.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/bjornbytes/graphql-lua"><img src="assets/img/lua-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/webonyx/graphql-php"><img src="assets/img/php_logo.png"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/graphql/libgraphqlparser"><img src="assets/img/c-logo.svg"></a></div>
-            <div class="impl-logo fragment fade-in" data-fragment-index="6"><a href="https://github.com/graphql-dotnet/graphql-dotnet"><img src="assets/img/csharp-logo.png"></a></div>
+              <div><a href="http://sangria-graphql.org/"><img src="assets/img/scala-logo.svg"></a>
+              </div>
+              <div><a href="http://sangria-graphql.org/"><img src="assets/img/sangria-logo.svg"></a>
+              </div>
+              <div><a href="https://github.com/graphql-java/graphql-java"><img
+                      src="assets/img/java-logo.svg"></a></div>
+              <div><a href="http://graphene-python.org/"><img src="assets/img/python-logo.svg"></a>
+              </div>
+              <div><a href="http://graphene-python.org/"><img src="assets/img/graphene.png"></a>
+              </div>
+              <div><a href="https://github.com/rmosolgo/graphql-ruby"><img
+                      src="assets/img/ruby_logo.svg"></a></div>
+              <div><a href="https://github.com/graphql-elixir/graphql"><img
+                      src="assets/img/elixir-logo.png"></a></div>
+              <div><a href="https://github.com/jdnavarro/graphql-haskell"><img
+                      src="assets/img/haskell-logo.svg"></a></div>
+              <div><a href="https://github.com/graphql-go/graphql"><img src="assets/img/gopher.svg"></a>
+              </div>
+              <div><a href="https://github.com/bjornbytes/graphql-lua"><img
+                      src="assets/img/lua-logo.svg"></a></div>
+              <div><a href="https://github.com/webonyx/graphql-php"><img
+                      src="assets/img/php_logo.png"></a></div>
+              <div><a href="https://github.com/graphql/libgraphqlparser"><img
+                      src="assets/img/c-logo.svg"></a></div>
+              <div><a href="https://github.com/graphql-dotnet/graphql-dotnet"><img
+                      src="assets/img/csharp-logo.png"></a></div>
           </div>
 
         </section>
 
-        <section>
-          <h2>Example: JavaScript</h2>
 
-          <pre><code data-trim contenteditable class="javascript">
-var TitleType = new GraphQLObjectType({
-  name: "Title",
-  description: "Land Register Title",
-  fields: {
-    titleNumber: {type: GraphQLString},
-    applicationReference: {
-      type: GraphQLString,
-      resolve(title) {
-        return tile.applicationReference;
-      }
-    }
-  }
-});
-          </code></pre>
-        </section>
-
-        <section data-background="#D45CA2" class="first-slide">
+                <section data-background="#D45CA2" class="first-slide">
           <h1>Thank you!</h1>
           <br>
           <ul class="fragment roll-in" data-fragment-index="2">
