@@ -78,63 +78,13 @@
 
               <ul class="fragment fade-in" data-fragment-index="1">
                 <li>Call: http://server/api/title/AG234343</li>
-                  <span>
-                  Response:
-                      {
-                          "title_number": "AGL10368",
-                          "tenure": "leasehold",
-                          "class_of_title": "absolute",
-                          "status": {
-                              "value": "open",
-                              "date": null
-                          },
-                          "edition_date": "2006-01-10",
-                          "application_reference": "UPD0019",
-                          "application_timestamp": "2006-01-10T00:00:01Z",
-                          "estate_interest": "estate in land",
-                          "entries": [
-                          {
-                              "subregister_code": "A",
-                              "schedule_code": null,
-                              "register_sequence": 1,
-                              "role_code": "RDES",
-                              "entry_date": "1989-06-30",
-                              "language_code": "eng",
-                              "draft_entry_version": null,
-                              "draft_entry_code": null,
-                              "entry_id": "2006-08-09T10:20:18.353485Z",
-                              "priority_timestamp": "2006-01-10T00:00:01Z",
-                              "entry_text": "Sample entry text"
-                          },
-                          {
-                              "subregister_code": "A",
-                              "schedule_code": null,
-                              "register_sequence": 2,
-                              "role_code": "RSLP",
-                              "entry_date": "1989-06-30",
-                              "language_code": "eng",
-                              "draft_entry_version": null,
-                              "draft_entry_code": null,
-                              "entry_id": "2006-08-09T10:20:18.713485Z",
-                              "priority_timestamp": "2006-01-10T00:00:01Z",
-                              "entry_text": "Sample entry text"
-                          },...
-                  </span>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="2">
               Under-fetching
 
               <ul class="fragment fade-in" data-fragment-index="3">
-                  <li>/title/AGL10368?summary=true</li>
-              <li>
-                  <span>Response:
-                  {
-                  "title_number": "AGL10368",
-                  "tenure": "leasehold",
-                  "class_of_title": "absolute"
-                  links...<span>
-              </li>
+                  <li>/title/AGL10368/entry/5/role_code</li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="4">
